@@ -107,57 +107,6 @@ SELECT Intern_Name
 FROM Internships
 WHERE Intern_Id NOT IN (SELECT Intern_Id FROM Top_Interns);
 
-CREATE TABLE employee (
-  ID INT PRIMARY KEY,
-  First_Name VARCHAR(20),
-  Salary INT
-);
-
-INSERT INTO employee (ID, First_Name, Salary)
-VALUES 
-    (1, 'Ben',8000),
-    (2, 'Joe',7000),
-    (3, 'Mark',4000),
-    (4, 'Steve',3000),
-    (5, 'John',7000);
-    #Q1-Write a query to return the second largest salary in the table.
-    SELECT MAX(Salary) AS Second_Largest_Salary
-    FROM employee WHERE Salary < (SELECT MAX(Salary) 
-    FROM employee
-);
-
-#Q2-Find the employee(s) with the highest salary:
-SELECT First_Name, Salary
-FROM employee
-WHERE Salary = (SELECT MAX(Salary) FROM employee);
-
-#Q3-Find the employee(s) with a salary greater than the average salary:
-SELECT First_Name, Salary
-FROM employee
-WHERE Salary > (SELECT AVG(Salary) FROM employee);
-
-#Q4-List employees with salaries greater than John's salary:
-SELECT First_Name, Salary
-FROM employee
-WHERE Salary > (SELECT Salary FROM employee WHERE First_Name = 'John');
-
-#Q5-Count the number of employees earning more than $5000:
-SELECT COUNT(*)
-FROM employee
-WHERE Salary > 5000;
-
-#Q6-Find the employees with salaries in the same range as Joe's salary:
-SELECT First_Name, Salary
-FROM employee
-WHERE Salary BETWEEN 
-   (SELECT Salary FROM employee WHERE First_Name = 'Joe')
-   AND 
-   (SELECT Salary FROM employee WHERE First_Name = 'Joe');
-
-#Q7-List the employees with salaries greater than the lowest salary:
-SELECT First_Name, Salary
-FROM employee
-WHERE Salary > (SELECT MIN(Salary) FROM employee);
 
 
 
